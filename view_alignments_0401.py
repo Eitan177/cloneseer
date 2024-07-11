@@ -147,16 +147,20 @@ def view_alignment(aln, use_consensus, fr, sample_id, sample_replicate_number, c
         seqs = np.array(seqs)[scipy.cluster.hierarchy.leaves_list(Z2)]
         forfileseqs = np.array(forfileseqs)[scipy.cluster.hierarchy.leaves_list(Z2)]
         forfileinsert = np.array(forfileinsert)[scipy.cluster.hierarchy.leaves_list(Z2)]
+        
         strc = [str(hhh) if hhh > 10 else '' for hhh in counts]
         ugg = ugg[scipy.cluster.hierarchy.leaves_list(Z2)]
         alnscores = alnscores[scipy.cluster.hierarchy.leaves_list(Z2)]
         
     if len(forfileinsert) == 1:
+        seqs=np.array(["".join(seq) for seq in seqs])
+        
         table_of_sequences = pd.DataFrame(
             {'sequence': seqs, 'sequenceNotformatted': forfileseqs, 'numberobserved': counts, 'inserts': forfileinsert,
              'alnscores': alnscores, 'mother_clone': consensus_sequence})
 
     else:
+        seqs=np.array(["".join(seq) for seq in seqs])
         table_of_sequences = pd.DataFrame(
             {'sequence': seqs, 'sequenceNotformatted': forfileseqs, 'numberobserved': counts,
              'inserts': forfileinsert.tolist(), 'alnscores': alnscores, 'mother_clone': consensus_sequence})

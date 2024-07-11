@@ -33,8 +33,6 @@ parser.add_argument('--aggregate', type=int, required=True)
 parser.add_argument('--save_path',  type=str, required=True)
 args = parser.parse_args()
 
-os.environ["IGDATA"]="/Users/eitanhalper-stromberg/Downloads/ncbi-igblast-1.21.0-src/c++/src/app/igblast/"
-
 print('argument parsing')
 sample_sheet = pd.read_excel(args.sample_sheet)
 if args.skiprows > 0:

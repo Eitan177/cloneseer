@@ -55,6 +55,7 @@ def make_alignmentplotwithcluster(aln_pd, useconsensus, sample_id, sample_replic
     forfileseqs = [rec.annotations['seq'] for rec in aln]
     forfileinsert = np.array([rec.annotations['insert'] for rec in aln])
     seqs = np.array([rec.seq for rec in aln])
+    seqs=np.array(["".join(seq) for seq in seqs])
     unformatted_seqs=aln_pd['sequenceNotformatted'].tolist()
     counts = [int(np.ceil(int(rec.description))) for rec in aln]
     alnscores = np.array([rec.annotations['alnscores'] for rec in aln])
@@ -69,6 +70,7 @@ def make_alignmentplotwithcluster(aln_pd, useconsensus, sample_id, sample_replic
     forfileseqs = np.array(forfileseqs)[neworder].tolist()
     forfileinsert = forfileinsert[neworder]
     seqs = seqs[neworder]
+
     unformatted_seqs=np.array(unformatted_seqs)[neworder]
 
     counts = np.array(counts)[neworder].tolist()

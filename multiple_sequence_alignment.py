@@ -86,7 +86,7 @@ def blastp_get_top_hits(input_fp, db_fp, organism='human', element='V',debug = T
         return None, None, None
 
 def run_igblast(file_path):
-    cmd1 = ["igblastn", "-query", file_path,"-germline_db_V", "Vs/internal_data/human/human_V", "-germline_db_D", "Vs/internal_data/human/human_D", "-germline_db_J", "Vs/internal_data/human/human_J", "-organism", "human", "-out", "igblastout.txt"]
+    cmd1 = ["bin/igblastn", "-query", file_path,"-germline_db_V", "database_clean/IGHV_clean.fasta", "-germline_db_D", "database_clean/IGHD_clean.fasta", "-germline_db_J", "database_clean/IGHJ_clean.fasta", "-organism", "human", "-out", "igblastout.txt"]
     #breakpoint()
     igblastoutput = subprocess.Popen(cmd1, stdout=subprocess.PIPE)
     igblastoutput.wait()
