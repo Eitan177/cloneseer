@@ -60,7 +60,7 @@ def make_alignmentplotwithcluster(aln_pd, useconsensus, sample_id, sample_replic
     counts = [int(np.ceil(int(rec.description))) for rec in aln]
     alnscores = np.array([rec.annotations['alnscores'] for rec in aln])
     homology_against_mother_clone=np.array([rec.annotations['homology_against_mother_clone'] for rec in aln])
-    closest_match = np.array([np.float(rec.name) for rec in aln])
+    closest_match = np.array([float(rec.name) for rec in aln])
     subclonecall = np.array([float(rec.id) for rec in aln])
     
     #neworder=np.lexsort([-1*np.array(counts),homology_against_mother_clone])
@@ -139,7 +139,7 @@ def make_alignmentplotwithcluster(aln_pd, useconsensus, sample_id, sample_replic
    
     locofinsertion2=[]
 
-    locofinsertion2 = [[np.int(y) for y in np.unique(np.array( jj.replace('[', '').replace(']', '').replace(' ','').split(',')))] for jj in forfileinsert[np.where(forfileinsert != '[]')]]
+    locofinsertion2 = [[int(y) for y in np.unique(np.array( jj.replace('[', '').replace(']', '').replace(' ','').split(',')))] for jj in forfileinsert[np.where(forfileinsert != '[]')]]
     for jj,hh in zip(np.where(forfileinsert != '[]')[0], locofinsertion2):
         gg[jj, hh] = 'gray'
 

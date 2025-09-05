@@ -80,7 +80,7 @@ def view_alignment(aln, use_consensus, fr, sample_id, sample_replicate_number, c
     forfileinsert = [rec.annotations['insert'] for rec in aln]  # Insert positions
     seqs = [rec.seq for rec in aln]  # Sequences without the inserts
     counts = [int(np.ceil(int(rec.description))) for rec in aln]  # The count
-    alnscores = [int(np.float(rec.name)) for rec in aln]  # The alignment score
+    alnscores = [int(float(rec.name)) for rec in aln]  # The alignment score
     alnscores = np.asarray(alnscores, dtype='int64')
     colors = get_colors_consensus(seqs, consensus_sequence)
 
@@ -146,7 +146,7 @@ def view_alignment(aln, use_consensus, fr, sample_id, sample_replicate_number, c
 
         seqs = np.array(seqs)[scipy.cluster.hierarchy.leaves_list(Z2)]
         forfileseqs = np.array(forfileseqs)[scipy.cluster.hierarchy.leaves_list(Z2)]
-        forfileinsert = np.array(forfileinsert)[scipy.cluster.hierarchy.leaves_list(Z2)]
+        forfileinsert = np.array(forfileinsert,dtype=object)[scipy.cluster.hierarchy.leaves_list(Z2)]
         
         strc = [str(hhh) if hhh > 10 else '' for hhh in counts]
         ugg = ugg[scipy.cluster.hierarchy.leaves_list(Z2)]
@@ -194,7 +194,7 @@ def view_alignment(aln, use_consensus, fr, sample_id, sample_replicate_number, c
                                                          x['insertion_in_trinucleotide'][x['outliers'] > 0].iloc[0],
                                                          x['sequenceNotformatted'][x['outliers'] > 0].iloc[0],
                                                          len(x['sequence'][x['outliers'] > 0].iloc[0].replace("-", "")),
-                                                         len(x['sequenceNotformatted'][x['outliers'] > 0].iloc[0].replace("-", "")))))#,
+                                                         len(x['sequenceNotformatted'][x['outliers'] > 0].iloc[0].replace("-", ""))), dtype=object))#,
                                                          #x['v-genes'][x['outliers'] > 0].iloc[0], 
                                                          #x['v-genes score'][x['outliers'] > 0].iloc[0],
                                                          #x['v-genes percent'][x['outliers'] > 0].iloc[0],
@@ -203,8 +203,8 @@ def view_alignment(aln, use_consensus, fr, sample_id, sample_replicate_number, c
                                                          #x['v-genes fullmatch ig element'][x['outliers'] > 0].iloc[0]        )))
 
         table_w_sequence_and_count = pd.DataFrame({'seq': np.vstack(table_of_outliers).T[0],
-                                                   'sum of counts': [np.int(ii) for ii in np.vstack(table_of_outliers).T[1]],
-                                                   'discrepant_positions': [str([np.int(jj) for jj in ii]) for ii in np.vstack(table_of_outliers).T[2]],
+                                                   'sum of counts': [int(ii) for ii in np.vstack(table_of_outliers).T[1]],
+                                                   'discrepant_positions': [str([int(jj) for jj in ii]) for ii in np.vstack(table_of_outliers).T[2]],
                                                    'mother_clone_distance': np.vstack(table_of_outliers).T[3],
                                                    'insertpositions': np.vstack(table_of_outliers).T[4],
                                                    'delete_trinucleotide': np.vstack(table_of_outliers).T[5],
